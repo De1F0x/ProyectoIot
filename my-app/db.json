@@ -1,0 +1,7 @@
+{
+    "raspberry" : {
+        "led":1,
+        "servo":0,
+        "rfid":1
+    }
+}
