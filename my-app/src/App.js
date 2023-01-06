@@ -9,6 +9,10 @@ import hum from './images/raspberry.png';
 const Button = ({state, setState}) => {
 
   const changeState = () => {
+    axios
+      .post("http://localhost:3004/raspberry", {
+        //aquí iría el state
+      })
     setState(!state);
   }
 
@@ -16,7 +20,7 @@ const Button = ({state, setState}) => {
     <button onClick={changeState}>
       {(state)?"on":"off"}
     </button>
-  )
+  );
 }
 
 const NavBar = () => {
@@ -99,6 +103,8 @@ function App() {
     }
     fetchdata();
   }, []);
+
+
 
   return (
     <>
