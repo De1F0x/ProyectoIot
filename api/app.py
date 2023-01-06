@@ -16,29 +16,80 @@ def get_conf():
     return jsonify(raspi_activator)
 
 
-@app.route("/distancia", methods=["GET"])
-def get_distancia():
+@app.route("/conf", methods=["POST"])
+def post_conf():
+    return jsonify(raspi_activator)
 
-    return jsonify(nabo)
 
-
+# Distancia POST y GET
 @app.route("/distancia", methods=["POST"])
-def led2on():
-    data = request.json
+def post_distancia():
+    data = request.form["distancia"]
+    db.insert_distancia(data)
     return jsonify(data)
 
 
+@app.route("/distancia", methods=["GET"])
+def get_distancia():
+    data = {"distancia": db.get_distancia()}
+    return jsonify(data)
+
+
+# Temperatura POST y GET
 @app.route("/temperatura", methods=["POST"])
 def post_temperature():
+    print(request.json)
     data = request.form["temperatura"]
     db.insert_temp(data)
-    raspi_activator["bombilla"] = 1 if data > 15 else 0
+    # raspi_activator["bombilla"] = 1 if data > 15 else 0
     return jsonify(data)
 
 
 @app.route("/temperatura", methods=["GET"])
 def get_temperature():
     data = {"temperatura": db.get_temp()}
+    return jsonify(data)
+
+
+# Humedad POST y GET
+@app.route("/humedad", methods=["POST"])
+def post_humedad():
+    data = request.form["humedad"]
+    db.insert_humedad(data)
+    return jsonify(data)
+
+
+@app.route("/humedad", methods=["GET"])
+def get_humedad():
+    data = {"humedad": db.get_humedad()}
+    return jsonify(data)
+
+
+# Lumens POST y GET
+@app.route("/lumens", methods=["POST"])
+def post_lumens():
+    data = request.form["luz"]
+    db.insert_lumens(data)
+    return jsonify(data)
+
+
+@app.route("/lumens", methods=["GET"])
+def get_lumens():
+    data = {"luz": db.get_lumens()}
+    return jsonify(data)
+
+
+# Movimiento POST y GET
+@app.route("/movimiento", methods=["POST"])
+def post_movimiento():
+    data = request.form["luz"]
+    db.insert_movement(data)
+    return jsonify(data)
+
+
+@app.route("/movimiento", methods=["GET"])
+def get_movimiento():
+    data = {"movimiento": db.get_movements()}
     return jsonify(data)
 
 
