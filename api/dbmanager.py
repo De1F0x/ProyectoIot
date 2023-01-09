@@ -79,13 +79,50 @@ class DBmanager:
         slqQuery = "SELECT time, move FROM movimiento;"
         cursor = self.connection.cursor()
         cursor.execute(slqQuery)
-        luminosidad = cursor.fetchall()
+        move = cursor.fetchall()
         cursor.close()
 
-        return luminosidad
+        return move
 
     def insert_movement(self, move):
         cur = self.connection.cursor()
         cur.execute('''INSERT INTO movimiento(move) VALUES (%s);''', (move, ))
         self.connection.commit()
         cur.close()
+
+    # last
+    def get_lastmovements(self):
+        slqQuery = "SELECT move FROM movimiento ORDER BY time DESC LIMIT 1;"
+        cursor = self.connection.cursor()
+        cursor.execute(slqQuery)
+        move = cursor.fetchall()
+        cursor.close()
+
+        return move
+
+    def get_lastdistancia(self):
+        slqQuery = "SELECT dist FROM distancia ORDER BY time DESC LIMIT 1;"
+        cursor = self.connection.cursor()
+        cursor.execute(slqQuery)
+        dist = cursor.fetchall()
+        cursor.close()
+
+        return dist
+
+    def get_lastluminosidad(self):
+        slqQuery = "SELECT lum FROM luminosidad ORDER BY time DESC LIMIT 1;"
+        cursor = self.connection.cursor()
+        cursor.execute(slqQuery)
+        lum = cursor.fetchall()
+        cursor.close()
+
+        return lum
+    
+    def get_lasttemperatura(self):
+        slqQuery = "SELECT temp FROM temperatura ORDER BY time DESC LIMIT 1;"
+        cursor = self.connection.cursor()
+        cursor.execute(slqQuery)
+        temp = cursor.fetchall()
+        cursor.close()
+
+        return temp

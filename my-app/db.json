@@ -1,7 +1,7 @@
 {
     "raspberry" : {
-        "led":1,
-        "servo":1,
-        "rfid":1
+        "bombilla" : 0,
+        "sonido" : 0,
+        "servo" : 0
     }
 }

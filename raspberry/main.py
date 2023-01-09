@@ -9,6 +9,12 @@ url = "http://localhost/"
 
 raspi_sensors = {"temperatura": 1, "distancia": 1, "humedad": 1, "luz": 1}
 
+raspi_activator = {
+    "bombilla" : 0,
+    "sonido" : 0,
+    "servo" : 0
+}
+
 url_dict = {key: url + key for key in raspi_sensors.keys()}
 
 GPIO.setup(22, GPIO.IN)
@@ -36,5 +42,5 @@ while True:
     print("light value {}".format(light))
     data = {"luz": light}
     r = requests.post(url_dict["luz"], data)
-
+    
     time.sleep(3)
