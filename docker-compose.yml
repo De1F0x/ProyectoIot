@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: iot
+      MYSQL_USER: raspi
+      MYSQL_PASSWORD: pwd
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - n1
+
+  flask:
+    build: ./api
+    command: sh -c "sleep 10s; python3 ./app.py"
+    ports:
+      - 4000:4000
+    expose:
+      - "4000"
+    depends_on:
+      - db
+    networks:
+      - n1
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./grafana/grafana_config:/etc/grafana
+      - ./grafana/grafana_data:/var/lib/grafana
+      - ./grafana/grafana_logs:/var/log/grafana
+
+networks:
+  n1:
