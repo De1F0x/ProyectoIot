@@ -53,3 +53,16 @@ El proyecto entero está construido sobre diferentes contenedores de Docker, dis
 ## Como lanzar el proyecto:
 1. En la ruta principal del proyecto encontramos un docker-compose.yml, que lanzaremos para iniciar el servidor, la BBDD y Grafana. Por otro lado, entraremos en la ruta de my-app para ejecutar el Dockerfile que iniciará una imágen en node que al mismo tiempo generará la página del controlador de la Raspberry.
 2. Una vez tenemos iniciados los diferentes contenedores podremos lanzar el **script** *main.py* en la ruta raspberry.
+
+## Comandos
+
+### Comandos para Docker
+```
+docker build -t controller .
+docker run controller
+```
+
+### Comandos para docker-compose
+```
+docker compose up -d
+```
