@@ -6,10 +6,11 @@ from dbmanager import DBmanager
 
 db = DBmanager()
 
-raspi_activator = {
+raspi_activator = {'raspberry' :{
     "bombilla" : 0,
     "sonido" : 0,
     "servo" : 0
+}
 }
 
 app = Flask(__name__)
@@ -18,18 +19,6 @@ CORS(app)
 @app.route('/index')
 def get_index():
     return "<p> Hola, Mikel </p>"
-
-# @app.route('/conf', methods = ["GET"])
-# def get_conf():
-#     print("hola")
-#     return jsonify(raspi_activator)
-
-# @app.route('/conf', methods = ["POST"])
-# def post_conf():
-#     data = request.json
-#     print(data)
-#     raspi_activator = data
-#     return jsonify(raspi_activator)
 
 @app.route('/conf', methods = ["GET","POST"])
 def get_conf():
@@ -63,7 +52,6 @@ def get_distancia():
 def post_temperature():
     data = request.form["temperatura"]
     db.insert_temp(data)
-    # raspi_activator["bombilla"] = 1 if data > 15 else 0
     return jsonify(data)
 
 @app.route('/temperatura', methods = ["GET"])

@@ -58,42 +58,35 @@ GPIO.setup(24, GPIO.OUT)
 while True:
     # Temperatura y Humedad
     humi, temp = sensorHT.read()
-    print('temperature {}C, humidity {}%'.format(temp, humi))
     data = {"temperatura": temp}
     r = requests.post(url_dict["temperatura"], data)
 
-    # print(r.content)
+    # Humedad
     data = {"humedad": humi}
     r = requests.post(url_dict["humedad"], data)
 
     # Distancia
     distance = sensor.get_distance()
-    print('{} cm'.format(distance))
     data = {"distancia": distance}
     r = requests.post(url_dict["distancia"], data)
 
     # Luz
     light = sensor_luz.light
-    print('light value {}'.format(light))
     data = {"luz": light}
     r = requests.post(url_dict["luz"], data)
 
-    #movimiento
+    # Movimiento
     move = GPIO.input(22)
-    print('move value {}'.format(move))
     data = {"move": move}
     r = requests.post(url_dict["movimiento"], data)
     
     #controller
     time.sleep(0.5)
     c = requests.get(url_conf)
-    print(c.json())
     bombilla = c.json()['raspberry']['bombilla']
     servo = c.json()['raspberry']['servo']
-    print(servo)
     if servo == False:
         servo_control = False
-        print('servo control {}'.format(servo_control))
     sonido = c.json()['raspberry']['sonido']
 
     #Sonido
@@ -104,7 +97,6 @@ while True:
 
     #Last Luz
     l = requests.get(url_dict["lastluminosidad"])
-    print(l.json()['lastlum'][0][0])
     if l.json()['lastlum'][0][0] < 150:
         GPIO.output(18, True)
     else:
@@ -113,7 +105,6 @@ while True:
     #Last Temp
     t = requests.get(url_dict["lasttemperatura"])
     if t.json()['lasttemp'][0][0] > 15:
-        print("ultima temp {}".format(t.json()['lasttemp'][0][0]))
         email.send_email("diego.miquelez@opendeusto.es", "Fuego",
          "El contenedor tiene más de {}º".format(t.json()['lasttemp'][0][0]))
 
@@ -125,7 +116,6 @@ while True:
 
     #Last dist
     d = requests.get(url_dict["lastdistancia"])
-    print(d.json())
     if d.json()['lastdist'][0][0] < 20:
         email.send_email("diego.miquelez@opendeusto.es", "Basura llena",
          "Al contenedor le quedan {} cm de espacio".format(d.json()['lastdist'][0][0]))
@@ -134,10 +124,9 @@ while True:
     m = requests.get(url_dict["lastmovimiento"])
     if m.json()['lastmove'][0][0] == False:
         servo_control = False
-        print('servo control {}'.format(servo_control))
     
+    #Servo move
     if (servo or m.json()['lastmove'][0][0]) and servo_control == False:
-        print(servo_control)
         try:
             p.start(0)
             p.ChangeDutyCycle(2.5)

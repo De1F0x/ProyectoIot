@@ -1,7 +1,0 @@
-{
-    "raspberry" : {
-        "bombilla" : 0,
-        "sonido" : 0,
-        "servo" : 0
-    }
-}

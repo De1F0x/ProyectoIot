@@ -30,7 +30,7 @@ const Container = ({ ledState, setLedState, rfidState, setRfidState, servoState,
     else if (buttonType === "servo") setServoState(!servoState);
 
     await axios
-      .post("http://192.168.1.130:4000/conf", newState);
+      .post("http://10.172.117.155:4000/conf", newState);
   };
 
   return (
@@ -99,7 +99,7 @@ function App() {
 
   useEffect(() => {
     const fetchdata = async () => {
-      const { data } = await axios.get("http://192.168.1.130:4000/conf");
+      const { data } = await axios.get("http://10.172.117.155:4000/conf");
       setLedState(data.led === 1);
       setRfidState(data.rfid === 1);
       setServoState(data.servo === 1);
