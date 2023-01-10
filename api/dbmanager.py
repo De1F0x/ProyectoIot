@@ -126,3 +126,12 @@ class DBmanager:
         cursor.close()
 
         return temp
+    
+    def get_lasthumedad(self):
+        slqQuery = "SELECT hum FROM humedad ORDER BY time DESC LIMIT 1;"
+        cursor = self.connection.cursor()
+        cursor.execute(slqQuery)
+        hum = cursor.fetchall()
+        cursor.close()
+
+        return hum

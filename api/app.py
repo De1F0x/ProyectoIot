@@ -119,28 +119,35 @@ def get_movimiento():
 @app.route('/lastmovimiento', methods = ["GET"])
 def get_lastmovimiento():
     data = {
-        "lastmovimiento" : db.get_lastmovements()
+        "lastmove" : db.get_lastmovements()
     }
     return jsonify(data)
 
 @app.route('/lastdistancia', methods = ["GET"])
 def get_lastdistancia():
     data = {
-        "distancia" : db.get_lastdistancia()
+        "lastdist" : db.get_lastdistancia()
     }
     return jsonify(data)
 
 @app.route('/lastluminosidad', methods = ["GET"])
 def get_lastluminosidad():
     data = {
-        "movimiento" : db.get_lastluminosidad()
+        "lastlum" : db.get_lastluminosidad()
     }
     return jsonify(data)
 
 @app.route('/lasttemperatura', methods = ["GET"])
-def get_temperatura():
+def get_lasttemperatura():
     data = {
-        "movimiento" : db.get_lasttemperatura()
+        "lasttemp" : db.get_lasttemperatura()
+    }
+    return jsonify(data)
+
+@app.route('/lasthumedad', methods = ["GET"])
+def get_lasthumedad():
+    data = {
+        "lasthum" : db.get_lasthumedad()
     }
     return jsonify(data)
 
