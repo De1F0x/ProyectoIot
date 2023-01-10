@@ -20,6 +20,21 @@ El proyecto consiste en un sistema de contenedores inteligentes mediante el cual
 
 > Esquema de la distribución general del proyecto.
 
+## Librerías
+Mediante el package.json perteneciente a **Node** instalamos las siguientes dependencias destinadas a la creación del controlador:
+
+    - Axios
+    - React
+    - react-dom
+    - react-scripts
+    - web-vitals
+
+Al nosotros lanzar el **docker-compose** principal, al mismo tiempo, lanzará un Dockerfile para el servidor que instalará las siguientes librerías:
+
+    - mysql-connector-python 
+    - flask 
+    - flask-cors
+
 ## Docker
 
 El proyecto entero está construido sobre diferentes contenedores de Docker, distribuidos de la siguiente manera:
