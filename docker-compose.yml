@@ -11,7 +11,8 @@ services:
       MYSQL_USER: raspi
       MYSQL_PASSWORD: pwd
     volumes:
-      - ./mysql:/var/lib/mysql
+      #- ./mysql:/var/lib/mysql
+      - ./mysql2:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
     networks:
@@ -35,9 +36,14 @@ services:
     ports:
       - "3001:3000"
     volumes:
-      - ./grafana/grafana_config:/etc/grafana
-      - ./grafana/grafana_data:/var/lib/grafana
-      - ./grafana/grafana_logs:/var/log/grafana
+      - grafana_config:/etc/grafana
+      - grafana_data:/var/lib/grafana
+      - grafana_logs:/var/log/grafana
 
 networks:
   n1:
+
+volumes:
+  grafana_config:
+  grafana_data:
+  grafana_logs:
