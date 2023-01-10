@@ -35,7 +35,7 @@ El proyecto entero está construido sobre diferentes contenedores de Docker, dis
 - Hemos creado un servidor en **Flask** que hará de intermediario entre el controlador, la BBDD y la propia Raspberry, teniendo la funcionalidad de una API REST. Es capaz de recibir peticiones "GET" y "POST" mediante las cuales accederemos directamente a la información guardada en la BBDD y alterar el estado de la Raspberry.  
 
 ### Web
-- Hemos utilizado React para interactuar con la Raspberry, que es una librería utilizada para crear interfaces de usuario en JavaScript. Utiliza una arquitectura de componentes, en la cual se divide la interfaz en distintos componentes reutilizables que contienen funcionalidad y lógica interna. 
+- Hemos utilizado React, que es una librería utilizada para crear interfaces de usuario en JavaScript. Utiliza una arquitectura de componentes, en la cual se divide la interfaz en distintos componentes reutilizables que contienen funcionalidad y lógica interna. 
 
 - Los activadores que controlaremos serán el **de la luz** para controlar un led que indicará si el contenedor está averiado, el de **sonido** para alejar a los animales, y el **servo** para abrir la tapa de la basura. 
 
